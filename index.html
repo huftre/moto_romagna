@@ -31,9 +31,9 @@ main{max-width:980px;margin:0 auto;padding:14px}
 </style>
 </head>
 <body>
-<section class="hero"><h1>TOSCANA - ROMAGNA</h1><p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p><div class="buttons"><a class="btn red" href="#programma">Vai al programma</a><a class="btn blue" href="#generale">Missione weekend</a></div></section>
+<section class="hero"><h1>TOSCANA - ROMAGNA</h1><p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p><div class="buttons"><a class="btn red" href="#programma">Vai al programma</a><a class="btn blue" href="#generale" id="infoButton">Informazioni</a></div></section>
 <main id="programma">
-<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
+<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
 <section id="generale" class="day-panel active"><section class="mission-card"><h2>🏆 Missione del weekend</h2><ul><li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li><li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li></ul><div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div></section><h2 class="section-title">📌 Regolamento</h2><section class="rules-card"><p class="rules-empty">Regolamento da inserire.</p></section></section>
 
 <section id="sabato" class="day-panel">
@@ -190,7 +190,35 @@ main{max-width:980px;margin:0 auto;padding:14px}
 
 <div class="footer-space"></div></main>
 <script>
-const buttons=document.querySelectorAll('.tab-button');const panels=document.querySelectorAll('.day-panel');
-buttons.forEach(button=>{button.addEventListener('click',()=>{const tab=button.dataset.tab;buttons.forEach(b=>b.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));button.classList.add('active');document.getElementById(tab).classList.add('active');window.scrollTo({top:document.getElementById('programma').offsetTop,behavior:'smooth'});});});
+const buttons = document.querySelectorAll('.tab-button');
+const panels = document.querySelectorAll('.day-panel');
+
+function activateTab(tab) {
+  buttons.forEach(b => b.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+
+  const selectedButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
+  const selectedPanel = document.getElementById(tab);
+
+  if (selectedButton && selectedPanel) {
+    selectedButton.classList.add('active');
+    selectedPanel.classList.add('active');
+    window.scrollTo({ top: document.getElementById('programma').offsetTop, behavior: 'smooth' });
+  }
+}
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    activateTab(button.dataset.tab);
+  });
+});
+
+const infoButton = document.getElementById('infoButton');
+if (infoButton) {
+  infoButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    activateTab('generale');
+  });
+}
 </script>
 </body></html>
