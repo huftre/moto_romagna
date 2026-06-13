@@ -1,263 +1,56 @@
 <!doctype html>
 <html lang="it">
 <head>
-<!-- ==========================================================
-     TOSCANA - ROMAGNA
-     File principale: index.html
-
-     MODIFICHE:
-     - Foto con URL diretti Wikimedia.
-     - Mappe con Google Directions embed.
-     - Tab: Generale / Sabato / Domenica / Lunedì.
-     ========================================================== -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TOSCANA - ROMAGNA</title>
 <style>
-:root {
-  --bg:#f3f4f6; --text:#111827; --muted:#6b7280; --card:#ffffff;
-  --red:#dc2626; --blue:#2563eb; --border:#e5e7eb; --orange:#ea580c;
-  --green:#15803d; --dark:#111827;
-}
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); }
-.hero {
-  padding:44px 18px 34px; color:white;
-  background:linear-gradient(135deg, rgba(17,24,39,.94), rgba(31,41,55,.82)),
-  url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Futa_Pass_2008.JPG/1200px-Futa_Pass_2008.JPG");
-  background-size:cover; background-position:center;
-}
-.hero h1 { font-size:36px; line-height:1.05; margin:0; letter-spacing:.3px; text-transform:uppercase; }
-.hero .subtitle { margin:12px 0 0; color:#e5e7eb; font-size:16px; line-height:1.45; }
-.buttons { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
-.btn { display:block; text-align:center; text-decoration:none; color:white; padding:17px 16px; border-radius:16px; font-weight:800; font-size:17px; }
-.btn.red { background:var(--red); } .btn.blue { background:var(--blue); }
-main { max-width:980px; margin:0 auto; padding:14px; }
-
-.tabbar {
-  position:sticky; top:0; z-index:20; display:grid; grid-template-columns:repeat(4,1fr);
-  gap:7px; background:rgba(243,244,246,.96); backdrop-filter:blur(10px);
-  padding:10px 0 12px; margin-bottom:8px;
-}
-.tab-button { border:1px solid var(--border); background:white; color:var(--text); border-radius:15px; padding:11px 6px; font-weight:900; font-size:13px; box-shadow:0 4px 14px rgba(0,0,0,.05); }
-.tab-button small { color:var(--muted); font-weight:800; }
-.tab-button.active { background:var(--dark); color:white; border-color:var(--dark); }
-.tab-button.active small { color:#d1d5db; }
-.day-panel { display:none; } .day-panel.active { display:block; }
-
-.map-card, .card, .photo-card, .biker-card, .rules-card, .mission-card {
-  background:var(--card); border-radius:20px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,.08); border:1px solid rgba(0,0,0,.05); margin-bottom:18px;
-}
-.map-wrap { width:100%; height:420px; background:#e5e7eb; }
-.map-wrap iframe { width:100%; height:100%; border:0; display:block; }
-.map-note { padding:14px 16px; color:var(--muted); font-size:15px; line-height:1.35; }
-.card, .mission-card, .rules-card { padding:18px; }
-h2 { margin:0 0 14px; font-size:24px; text-transform:uppercase; letter-spacing:.4px; }
-.km { display:inline-block; font-size:14px; color:var(--muted); background:#f3f4f6; padding:6px 10px; border-radius:999px; vertical-align:middle; margin-left:6px; }
-.day-buttons { display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
-.mini-btn { display:block; text-decoration:none; text-align:center; background:var(--blue); color:white; border-radius:14px; padding:13px 14px; font-weight:900; }
-.mini-btn.red { background:var(--red); }
-
-.stop { display:grid; grid-template-columns:86px 1fr; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); align-items:center; }
-.stop:last-child { border-bottom:none; }
-.time { min-height:54px; border-radius:16px; background:linear-gradient(135deg,#111827,#374151); color:white; display:flex; align-items:center; justify-content:center; text-align:center; padding:8px; font-size:16px; font-weight:900; }
-.stop strong { display:block; font-size:18px; margin-bottom:4px; }
-.stop span { display:block; color:var(--muted); font-size:15px; line-height:1.35; }
-.stop a { display:inline-block; margin-top:7px; color:var(--blue); text-decoration:none; font-weight:800; font-size:15px; }
-.warning { margin-top:14px; background:#fff7ed; border:1px solid #fed7aa; color:#7c2d12; border-radius:16px; padding:14px; line-height:1.35; }
-.mission-card ul { margin:0; padding-left:22px; } .mission-card li { margin:8px 0; line-height:1.4; }
-
-.photos, .biker-grid { display:grid; grid-template-columns:1fr; gap:18px; }
-.section-title { margin:24px 0 12px; font-size:25px; font-weight:900; text-transform:uppercase; }
-.photo-link { display:block; min-height:220px; background:linear-gradient(135deg,#dbeafe,#fed7aa); position:relative; text-decoration:none; overflow:hidden; }
-.photo-link img { width:100%; height:240px; object-fit:cover; display:block; }
-.photo-link.empty-photo { min-height:0; height:0; }
-.photo-body, .biker-card { padding:16px 18px 18px; }
-.photo-body h3, .biker-card h3 { margin:0 0 8px; font-size:22px; }
-.photo-body p, .biker-card p { margin:0 0 14px; color:#4b5563; font-size:16px; line-height:1.4; }
-.photo-body a, .biker-card a { color:var(--blue); text-decoration:none; font-weight:800; font-size:16px; }
-.biker-card { position:relative; border-left:6px solid var(--orange); }
-.biker-tag { display:inline-block; margin-bottom:10px; background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; padding:6px 10px; border-radius:999px; font-size:13px; font-weight:900; text-transform:uppercase; }
-.biker-note { margin:0 0 18px; color:#6b7280; font-size:15px; line-height:1.45; font-style:italic; }
-.rules-card { border-left:6px solid var(--green); } .rules-empty { margin:0; color:var(--muted); font-size:16px; line-height:1.45; font-style:italic; }
-.footer-space { height:18px; }
-
-@media (min-width:800px) {
-  .hero { padding:52px 30px 42px; } .hero h1 { font-size:52px; }
-  .buttons { flex-direction:row; } .btn { width:auto; min-width:280px; }
-  .map-wrap { height:520px; } .photos { grid-template-columns:repeat(3,1fr); } .biker-grid { grid-template-columns:repeat(2,1fr); }
-  .photo-link img { height:190px; } .day-buttons { flex-direction:row; } .mini-btn { width:auto; min-width:260px; }
-}
-@media (max-width:430px) {
-  main { padding:12px 10px; } .hero { padding-top:44px; } .hero h1 { font-size:35px; }
-  .map-wrap { height:360px; } .photo-link img { height:225px; } .stop { grid-template-columns:78px 1fr; } .time { font-size:15px; }
-}
+:root {--bg:#f3f4f6;--text:#111827;--muted:#6b7280;--card:#fff;--red:#dc2626;--blue:#2563eb;--border:#e5e7eb;--orange:#ea580c;--green:#15803d;--dark:#111827;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.hero{padding:44px 18px 34px;color:white;background:linear-gradient(135deg,rgba(17,24,39,.94),rgba(31,41,55,.82)),data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230f172a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%232563eb%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23fde68a%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3ETOSCANA%20-%20ROMAGNA%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3Ebenzina%20%C2%B7%20caff%C3%A8%20%C2%B7%20curve%20%C2%B7%20risate%3C/text%3E%0A%3C/svg%3E;background-size:cover;background-position:center}
+.hero h1{font-size:36px;line-height:1.05;margin:0;letter-spacing:.3px;text-transform:uppercase}.hero .subtitle{margin:12px 0 0;color:#e5e7eb;font-size:16px;line-height:1.45}
+.buttons{display:flex;flex-direction:column;gap:12px;margin-top:24px}.btn{display:block;text-align:center;text-decoration:none;color:white;padding:17px 16px;border-radius:16px;font-weight:800;font-size:17px}.btn.red{background:var(--red)}.btn.blue{background:var(--blue)}
+main{max-width:980px;margin:0 auto;padding:14px}
+.tabbar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:rgba(243,244,246,.96);backdrop-filter:blur(10px);padding:10px 0 12px;margin-bottom:8px}
+.tab-button{border:1px solid var(--border);background:white;color:var(--text);border-radius:15px;padding:11px 6px;font-weight:900;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.05)}.tab-button small{color:var(--muted);font-weight:800}.tab-button.active{background:var(--dark);color:white;border-color:var(--dark)}.tab-button.active small{color:#d1d5db}
+.day-panel{display:none}.day-panel.active{display:block}
+.map-card,.card,.photo-card,.biker-card,.rules-card,.mission-card{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05);margin-bottom:18px}
+.map-wrap{width:100%;height:420px;background:#e5e7eb}.map-wrap iframe{width:100%;height:100%;border:0;display:block}.map-note{padding:14px 16px;color:var(--muted);font-size:15px;line-height:1.35}
+.card,.mission-card,.rules-card{padding:18px}h2{margin:0 0 14px;font-size:24px;text-transform:uppercase;letter-spacing:.4px}.km{display:inline-block;font-size:14px;color:var(--muted);background:#f3f4f6;padding:6px 10px;border-radius:999px;vertical-align:middle;margin-left:6px}
+.day-buttons{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}.mini-btn{display:block;text-decoration:none;text-align:center;background:var(--blue);color:white;border-radius:14px;padding:13px 14px;font-weight:900}.mini-btn.red{background:var(--red)}
+.stop{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center}.stop:last-child{border-bottom:none}.time{min-height:54px;border-radius:16px;background:linear-gradient(135deg,#111827,#374151);color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:16px;font-weight:900}
+.stop strong{display:block;font-size:18px;margin-bottom:4px}.stop span{display:block;color:var(--muted);font-size:15px;line-height:1.35}.stop a{display:inline-block;margin-top:7px;color:var(--blue);text-decoration:none;font-weight:800;font-size:15px}
+.warning{margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:16px;padding:14px;line-height:1.35}.mission-card ul{margin:0;padding-left:22px}.mission-card li{margin:8px 0;line-height:1.4}
+.photos,.biker-grid{display:grid;grid-template-columns:1fr;gap:18px}.section-title{margin:24px 0 12px;font-size:25px;font-weight:900;text-transform:uppercase}
+.photo-link{display:block;height:240px;background:#dbeafe;overflow:hidden;text-decoration:none}.photo-link img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-body,.biker-card{padding:16px 18px 18px}.photo-body h3,.biker-card h3{margin:0 0 8px;font-size:22px}.photo-body p,.biker-card p{margin:0 0 14px;color:#4b5563;font-size:16px;line-height:1.4}.photo-body a,.biker-card a{color:var(--blue);text-decoration:none;font-weight:800;font-size:16px}
+.biker-card{position:relative;border-left:6px solid var(--orange)}.biker-tag{display:inline-block;margin-bottom:10px;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:900;text-transform:uppercase}.biker-note{margin:0 0 18px;color:#6b7280;font-size:15px;line-height:1.45;font-style:italic}
+.rules-card{border-left:6px solid var(--green)}.rules-empty{margin:0;color:var(--muted);font-size:16px;line-height:1.45;font-style:italic}.footer-space{height:18px}
+@media(min-width:800px){.hero{padding:52px 30px 42px}.hero h1{font-size:52px}.buttons{flex-direction:row}.btn{width:auto;min-width:280px}.map-wrap{height:520px}.photos{grid-template-columns:repeat(3,1fr)}.biker-grid{grid-template-columns:repeat(2,1fr)}.photo-link{height:190px}.day-buttons{flex-direction:row}.mini-btn{width:auto;min-width:260px}}
+@media(max-width:430px){main{padding:12px 10px}.hero{padding-top:44px}.hero h1{font-size:35px}.map-wrap{height:360px}.photo-link{height:225px}.stop{grid-template-columns:78px 1fr}.time{font-size:15px}}
 </style>
 </head>
 <body>
-<section class="hero">
-  <h1>TOSCANA - ROMAGNA</h1>
-  <p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p>
-  <div class="buttons">
-    <a class="btn red" href="#programma">Vai al programma</a>
-    <a class="btn blue" href="#generale">Missione weekend</a>
-  </div>
-</section>
-
+<section class="hero"><h1>TOSCANA - ROMAGNA</h1><p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p><div class="buttons"><a class="btn red" href="#programma">Vai al programma</a><a class="btn blue" href="#generale">Missione weekend</a></div></section>
 <main id="programma">
-<nav class="tabbar" aria-label="Sezioni del viaggio">
-  <button class="tab-button active" data-tab="generale">Generale<br><small>info</small></button>
-  <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
-  <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
-  <button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button>
-</nav>
-
-<section id="generale" class="day-panel active">
-  <section class="mission-card">
-    <h2>🏆 Missione del weekend</h2>
-    <ul>
-      <li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li>
-      <li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li>
-    </ul>
-    <div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div>
-  </section>
-  <h2 class="section-title">📌 Regolamento</h2>
-  <section class="rules-card"><p class="rules-empty">Regolamento da inserire.</p></section>
-</section>
-
+<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
+<section id="generale" class="day-panel active"><section class="mission-card"><h2>🏆 Missione del weekend</h2><ul><li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li><li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li></ul><div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div></section><h2 class="section-title">📌 Regolamento</h2><section class="rules-card"><p class="rules-empty">Regolamento da inserire.</p></section></section>
 
 <section id="sabato" class="day-panel">
   <section class="map-card">
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=41.9954429,12.6659791&daddr=42.8730,12.0160+to:43.8310,11.2000+to:44.1733,11.3383+to:44.3559,11.7161+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <div class="map-note">
-      Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
-    </div>
+    <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=41.9954429,12.6659791&daddr=42.8730,12.0160+to:43.8310,11.2000+to:44.1733,11.3383+to:44.3559,11.7161+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
-
   <section class="card">
     <h2>🛣️ Sabato 27/06 <span class="km">487 km</span></h2>
-    <div class="day-buttons">
-      <a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=ENI%20Salaria%20Est%20Roma&waypoints=IP%20Fabro%7CIP%20Sesto%20Fiorentino%7CChalet%20Raticosa%7CBar%20Renzo%20Imola&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a>
-    </div>
-    
-        <div class="stop">
-          <div class="time">08:00</div>
-          <div>
-            <strong>Ritrovo 🤗⛽☕</strong>
-            <span>ENI Salaria Est</span>
-            <a href="https://maps.app.goo.gl/Wovzund9ZAKV7Tfa9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">08:30</div>
-          <div>
-            <strong>Partenza 🏍️💨</strong>
-            <span>Direzione Toscana - Romagna</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">10:00</div>
-          <div>
-            <strong>Sosta ☕🚻</strong>
-            <span>IP Fabro</span>
-            <a href="https://maps.app.goo.gl/5T7heowzCdXBGv6u5?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">10:15</div>
-          <div>
-            <strong>Ripartenza 🏍️💨</strong>
-            <span>Chi manca all’appello offre il caffè</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">12:00</div>
-          <div>
-            <strong>Sosta ⛽☕🚻</strong>
-            <span>IP Sesto Fiorentino</span>
-            <a href="https://maps.app.goo.gl/vtyx1FRMM7vtCkcb9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">12:30</div>
-          <div>
-            <strong>Ripartenza 🏍️💨</strong>
-            <span>Verso la Raticosa</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">13:30</div>
-          <div>
-            <strong>Pranzo 🥪📸</strong>
-            <span>Chalet Raticosa</span>
-            <a href="https://maps.app.goo.gl/MbXNtQ5D6Qpj1u4F6?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">14:30</div>
-          <div>
-            <strong>Ripartenza 🏍️💨</strong>
-            <span>Con 2 kg in più e la stessa voglia di piegare</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">15:30</div>
-          <div>
-            <strong>Sosta ☕🚻</strong>
-            <span>Bar Renzo - Imola</span>
-            <a href="https://maps.app.goo.gl/xPZQj5hNbQjwLMQs7?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">16:00</div>
-          <div>
-            <strong>Ripartenza 🏍️💨</strong>
-            <span>Direzione Rimini</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">17:30</div>
-          <div>
-            <strong>Arrivo 🏁</strong>
-            <span>Hotel Vannucci - Rimini</span>
-            <a href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">20:30</div>
-          <div>
-            <strong>Cena 🌮🥗🍷</strong>
-            <span>Museo Nazionale del Motociclo</span>
-            <a href="https://maps.app.goo.gl/VutKovGwqkrmueR6A?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
+    <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=ENI%20Salaria%20Est%20Roma&waypoints=IP%20Fabro%7CIP%20Sesto%20Fiorentino%7CChalet%20Raticosa%7CBar%20Renzo%20Imola&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
+    <div class="stop"><div class="time">08:00</div><div><strong>Ritrovo 🤗⛽☕</strong><span>ENI Salaria Est</span><a href="https://maps.app.goo.gl/Wovzund9ZAKV7Tfa9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">08:30</div><div><strong>Partenza 🏍️💨</strong><span>Direzione Toscana - Romagna</span></div></div><div class="stop"><div class="time">10:00</div><div><strong>Sosta ☕🚻</strong><span>IP Fabro</span><a href="https://maps.app.goo.gl/5T7heowzCdXBGv6u5?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">10:15</div><div><strong>Ripartenza 🏍️💨</strong><span>Chi manca all’appello offre il caffè</span></div></div><div class="stop"><div class="time">12:00</div><div><strong>Sosta ⛽☕🚻</strong><span>IP Sesto Fiorentino</span><a href="https://maps.app.goo.gl/vtyx1FRMM7vtCkcb9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">12:30</div><div><strong>Ripartenza 🏍️💨</strong><span>Verso la Raticosa</span></div></div><div class="stop"><div class="time">13:30</div><div><strong>Pranzo 🥪📸</strong><span>Chalet Raticosa</span><a href="https://maps.app.goo.gl/MbXNtQ5D6Qpj1u4F6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">14:30</div><div><strong>Ripartenza 🏍️💨</strong><span>Con 2 kg in più e la stessa voglia di piegare</span></div></div><div class="stop"><div class="time">15:30</div><div><strong>Sosta ☕🚻</strong><span>Bar Renzo - Imola</span><a href="https://maps.app.goo.gl/xPZQj5hNbQjwLMQs7?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Ripartenza 🏍️💨</strong><span>Direzione Rimini</span></div></div><div class="stop"><div class="time">17:30</div><div><strong>Arrivo 🏁</strong><span>Hotel Vannucci - Rimini</span><a href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">20:30</div><div><strong>Cena 🌮🥗🍷</strong><span>Museo Nazionale del Motociclo</span><a href="https://maps.app.goo.gl/VutKovGwqkrmueR6A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
-
   <h2 class="section-title">📸 Da fotografare — Sabato 27/06</h2>
   <section class="photos">
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Passo della Raticosa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/800px-Raticosadamtbeni.jpg" alt="Passo della Raticosa" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230f172a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%232563eb%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23fde68a%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EPasso%20della%20Raticosa%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EAppennino%20tosco-emiliano%3C/text%3E%0A%3C/svg%3E" alt="Passo della Raticosa">
           </a>
           <div class="photo-body">
             <h3>Passo della Raticosa</h3>
@@ -267,8 +60,8 @@ h2 { margin:0 0 14px; font-size:24px; text-transform:uppercase; letter-spacing:.
         </article>
         
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Futa_Pass_2008.JPG" target="_blank" class="photo-link" aria-label="Apri foto originale di Passo della Futa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Futa_Pass_2008.JPG/800px-Futa_Pass_2008.JPG" alt="Passo della Futa" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/File:Futa_Pass_2008.JPG" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230f172a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%232563eb%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23fde68a%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EPasso%20della%20Futa%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EStrada%2C%20curve%20e%20paesaggio%3C/text%3E%0A%3C/svg%3E" alt="Passo della Futa">
           </a>
           <div class="photo-body">
             <h3>Passo della Futa</h3>
@@ -278,269 +71,88 @@ h2 { margin:0 0 14px; font-size:24px; text-transform:uppercase; letter-spacing:.
         </article>
         
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Appennino Tosco-Emiliano">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/800px-Raticosadamtbeni.jpg" alt="Appennino Tosco-Emiliano" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/Category:Appennino_tosco-emiliano" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23064e3b%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%2316a34a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23bbf7d0%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EAppennino%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3ECurve%20e%20crinali%3C/text%3E%0A%3C/svg%3E" alt="Appennino Tosco-Emiliano">
           </a>
           <div class="photo-body">
             <h3>Appennino Tosco-Emiliano</h3>
             <p>Curve, crinali, boschi e tratti guidati: il paesaggio perfetto per il primo giorno.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank">Apri foto originale</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:Appennino_tosco-emiliano" target="_blank">Apri foto originale</a>
           </div>
         </article>
         </section>
-
   <h2 class="section-title">🏍️ Per il biker — Sabato 27/06</h2>
-  <p class="biker-note">
-    Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.
-  </p>
-  <section class="biker-grid">
-        <article class="biker-card">
-          <div class="biker-tag">Trasferimento</div>
-          <h3>Fabro → Sesto Fiorentino</h3>
-          <p>Tratto lungo e scorrevole per macinare chilometri: ritmo regolare, attenzione a traffico e stanchezza.</p>
-          <a href="https://www.google.com/maps/dir/Fabro/Sesto+Fiorentino" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Curve</div>
-          <h3>Sesto Fiorentino → Raticosa</h3>
-          <p>Salita appenninica con curve, cambi di ritmo e paesaggio: uno dei tratti più interessanti del sabato.</p>
-          <a href="https://www.google.com/maps/dir/Sesto+Fiorentino/Passo+della+Raticosa" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Guidato</div>
-          <h3>Raticosa → Imola</h3>
-          <p>Discesa verso la Romagna: strada motociclistica, curve e tratti panoramici da affrontare senza fretta.</p>
-          <a href="https://www.google.com/maps/dir/Passo+della+Raticosa/Imola" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        </section>
+  <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
+  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Trasferimento</div><h3>Fabro → Sesto Fiorentino</h3><p>Tratto lungo e scorrevole per macinare chilometri: ritmo regolare, attenzione a traffico e stanchezza.</p><a href="https://www.google.com/maps/dir/Fabro/Sesto+Fiorentino" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Curve</div><h3>Sesto Fiorentino → Raticosa</h3><p>Salita appenninica con curve, cambi di ritmo e paesaggio: uno dei tratti più interessanti del sabato.</p><a href="https://www.google.com/maps/dir/Sesto+Fiorentino/Passo+della+Raticosa" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Guidato</div><h3>Raticosa → Imola</h3><p>Discesa verso la Romagna: strada motociclistica, curve e tratti panoramici da affrontare senza fretta.</p><a href="https://www.google.com/maps/dir/Passo+della+Raticosa/Imola" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
 
 <section id="domenica" class="day-panel">
   <section class="map-card">
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=44.1270,12.0640+to:43.9540,11.7030+to:44.1490,12.1360+to:43.9360,12.4470+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <div class="map-note">
-      Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
-    </div>
+    <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=44.1270,12.0640+to:43.9540,11.7030+to:44.1490,12.1360+to:43.9360,12.4470+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
-
   <section class="card">
     <h2>🏍️ Domenica 28/06 <span class="km">347 km</span></h2>
-    <div class="day-buttons">
-      <a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=Bar%20Sport%20Meldola%7CBar%20Il%20Muraglione%7CEsso%20Bertinoro%7CSan%20Marino&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a>
-    </div>
-    
-        <div class="stop">
-          <div class="time">09:00</div>
-          <div>
-            <strong>Ritrovo ☕</strong>
-            <span>Hotel Vannucci — verifica equipaggi e sopravvissuti alla sera precedente 😎</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">09:15</div>
-          <div>
-            <strong>Partenza 🏍️💨</strong>
-            <span>Direzione colline romagnole</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">10:15</div>
-          <div>
-            <strong>Sosta ☕🚻</strong>
-            <span>Bar Sport - Meldola</span>
-            <a href="https://maps.app.goo.gl/p5M6eXqr6TiQLMfm6?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">12:00</div>
-          <div>
-            <strong>Pranzo 🥪📸☕🚻</strong>
-            <span>Bar Il Muraglione</span>
-            <a href="https://maps.app.goo.gl/KhPk4ePkSgTgGg46A?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">14:30</div>
-          <div>
-            <strong>Sosta ⛽☕🚻</strong>
-            <span>Esso Bertinoro</span>
-            <a href="https://maps.app.goo.gl/5HxwfLD1LJjw9xqD9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">16:00</div>
-          <div>
-            <strong>Visita 📸</strong>
-            <span>San Marino — souvenir, calamite e acquisti indispensabili</span>
-            <a href="https://maps.app.goo.gl/gfk9AwMCeAyZUj6V7?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">20:00</div>
-          <div>
-            <strong>Cena 🍝</strong>
-            <span>Trattoria Da Renzi</span>
-            <a href="https://maps.app.goo.gl/97ySs3uvNuM7b327A?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
+    <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=Bar%20Sport%20Meldola%7CBar%20Il%20Muraglione%7CEsso%20Bertinoro%7CSan%20Marino&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
+    <div class="stop"><div class="time">09:00</div><div><strong>Ritrovo ☕</strong><span>Hotel Vannucci — verifica equipaggi e sopravvissuti alla sera precedente 😎</span></div></div><div class="stop"><div class="time">09:15</div><div><strong>Partenza 🏍️💨</strong><span>Direzione colline romagnole</span></div></div><div class="stop"><div class="time">10:15</div><div><strong>Sosta ☕🚻</strong><span>Bar Sport - Meldola</span><a href="https://maps.app.goo.gl/p5M6eXqr6TiQLMfm6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">12:00</div><div><strong>Pranzo 🥪📸☕🚻</strong><span>Bar Il Muraglione</span><a href="https://maps.app.goo.gl/KhPk4ePkSgTgGg46A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">14:30</div><div><strong>Sosta ⛽☕🚻</strong><span>Esso Bertinoro</span><a href="https://maps.app.goo.gl/5HxwfLD1LJjw9xqD9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Visita 📸</strong><span>San Marino — souvenir, calamite e acquisti indispensabili</span><a href="https://maps.app.goo.gl/gfk9AwMCeAyZUj6V7?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">20:00</div><div><strong>Cena 🍝</strong><span>Trattoria Da Renzi</span><a href="https://maps.app.goo.gl/97ySs3uvNuM7b327A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
-
   <h2 class="section-title">📸 Da fotografare — Domenica 28/06</h2>
   <section class="photos">
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di San Marino">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_marino_guaita.jpg/800px-San_marino_guaita.jpg" alt="San Marino" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/Category:Passo_del_Muraglione" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230f172a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%232563eb%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23fde68a%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EMuraglione%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EPasso%20e%20curve%3C/text%3E%0A%3C/svg%3E" alt="Passo del Muraglione">
+          </a>
+          <div class="photo-body">
+            <h3>Passo del Muraglione</h3>
+            <p>Uno dei punti più motociclistici della domenica: sosta, foto e curve.</p>
+            <a href="https://commons.wikimedia.org/wiki/Category:Passo_del_Muraglione" target="_blank">Apri foto originale</a>
+          </div>
+        </article>
+        
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/Category:Bertinoro" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23064e3b%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%2316a34a%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23bbf7d0%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EBertinoro%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EColline%20romagnole%3C/text%3E%0A%3C/svg%3E" alt="Bertinoro">
+          </a>
+          <div class="photo-body">
+            <h3>Bertinoro</h3>
+            <p>Balcone della Romagna: colline, vista aperta e atmosfera da sosta panoramica.</p>
+            <a href="https://commons.wikimedia.org/wiki/Category:Bertinoro" target="_blank">Apri foto originale</a>
+          </div>
+        </article>
+        
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/Category:San_Marino" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23111827%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%236d28d9%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23facc15%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3ESan%20Marino%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3ETorri%20e%20panorama%3C/text%3E%0A%3C/svg%3E" alt="San Marino">
           </a>
           <div class="photo-body">
             <h3>San Marino</h3>
             <p>Centro storico, torri e panorama sulla Riviera: uno dei punti più fotografici del weekend.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank">Apri foto originale</a>
-          </div>
-        </article>
-        
-        <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Guaita_Tower_-_San_Marino_-_view_from_Salita_alla_Cesta.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Guaita Tower">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Guaita_Tower_-_San_Marino_-_view_from_Salita_alla_Cesta.jpg/800px-Guaita_Tower_-_San_Marino_-_view_from_Salita_alla_Cesta.jpg" alt="Guaita Tower" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
-          </a>
-          <div class="photo-body">
-            <h3>Guaita Tower</h3>
-            <p>La torre più famosa di San Marino, perfetta per foto panoramiche e ricordo del viaggio.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:Guaita_Tower_-_San_Marino_-_view_from_Salita_alla_Cesta.jpg" target="_blank">Apri foto originale</a>
-          </div>
-        </article>
-        
-        <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Colline romagnole">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_marino_guaita.jpg/800px-San_marino_guaita.jpg" alt="Colline romagnole" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
-          </a>
-          <div class="photo-body">
-            <h3>Colline romagnole</h3>
-            <p>Tratti aperti e panoramici verso Bertinoro e San Marino.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank">Apri foto originale</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:San_Marino" target="_blank">Apri foto originale</a>
           </div>
         </article>
         </section>
-
   <h2 class="section-title">🏍️ Per il biker — Domenica 28/06</h2>
-  <p class="biker-note">
-    Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.
-  </p>
-  <section class="biker-grid">
-        <article class="biker-card">
-          <div class="biker-tag">Tecnico</div>
-          <h3>Meldola → Muraglione</h3>
-          <p>Tratto appenninico da biker: curve, saliscendi e guida fluida di gruppo.</p>
-          <a href="https://www.google.com/maps/dir/Meldola/Passo+del+Muraglione" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Panoramico</div>
-          <h3>Muraglione → Bertinoro</h3>
-          <p>Rientro verso le colline romagnole: tratti vari, paesaggi aperti e guida piacevole.</p>
-          <a href="https://www.google.com/maps/dir/Passo+del+Muraglione/Bertinoro" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Turistico</div>
-          <h3>Bertinoro → San Marino</h3>
-          <p>Tratto più rilassato e panoramico, perfetto per arrivare alla visita senza stress.</p>
-          <a href="https://www.google.com/maps/dir/Bertinoro/San+Marino" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        </section>
+  <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
+  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Tecnico</div><h3>Meldola → Muraglione</h3><p>Tratto appenninico da biker: curve, saliscendi e guida fluida di gruppo.</p><a href="https://www.google.com/maps/dir/Meldola/Passo+del+Muraglione" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Panoramico</div><h3>Muraglione → Bertinoro</h3><p>Rientro verso le colline romagnole: tratti vari, paesaggi aperti e guida piacevole.</p><a href="https://www.google.com/maps/dir/Passo+del+Muraglione/Bertinoro" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Turistico</div><h3>Bertinoro → San Marino</h3><p>Tratto più rilassato e panoramico, perfetto per arrivare alla visita senza stress.</p><a href="https://www.google.com/maps/dir/Bertinoro/San+Marino" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
 
 <section id="lunedi" class="day-panel">
   <section class="map-card">
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=43.9670,12.6030+to:43.8990,12.7530+to:43.3540,12.5730+to:42.6900,12.5400+to:41.9954429,12.6659791&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <div class="map-note">
-      Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
-    </div>
+    <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=43.9670,12.6030+to:43.8990,12.7530+to:43.3540,12.5730+to:42.6900,12.5400+to:41.9954429,12.6659791&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
-
   <section class="card">
     <h2>🏁 Lunedì 29/06 <span class="km">314 km</span></h2>
-    <div class="day-buttons">
-      <a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=La%20Storia%20del%20Sic%20Coriano%7CVR46%20Store%20Tavullia%7CBar%20Contessa%20Gubbio%7CEsso%20E45%20Acquasparta&destination=ENI%20Salaria%20Ovest&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a>
-    </div>
-    
-        <div class="stop">
-          <div class="time">09:15</div>
-          <div>
-            <strong>Ritrovo</strong>
-            <span>Hotel Vannucci — check-out fatto e moto carica</span>
-            
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">09:45</div>
-          <div>
-            <strong>Visita ❤️</strong>
-            <span>Museo “La Storia del Sic” - Coriano</span>
-            <a href="https://maps.app.goo.gl/B8vZxRnTpMWyVXty5?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">11:30</div>
-          <div>
-            <strong>Visita 📸☕🛍️</strong>
-            <span>VR46 Store - Tavullia — alleggerimento ufficiale del portafoglio</span>
-            <a href="https://maps.app.goo.gl/yMMkkLhLwAZRbcDp9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">13:30</div>
-          <div>
-            <strong>Pranzo 🥪☕🚻</strong>
-            <span>Bar Contessa - Gubbio</span>
-            <a href="https://maps.app.goo.gl/DNDMyGJBpbTtZsav6?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">16:00</div>
-          <div>
-            <strong>Sosta ⛽☕🚻</strong>
-            <span>Esso E45 Acquasparta</span>
-            <a href="https://maps.app.goo.gl/nZepBLPrvNNxD62U9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
-        <div class="stop">
-          <div class="time">17:30</div>
-          <div>
-            <strong>Saluti finali 🤗⛽☕</strong>
-            <span>Eni Salaria Ovest — foto di gruppo, abbracci e promesse</span>
-            <a href="https://maps.app.goo.gl/pvAzHFiANMCDneZp9?g_st=ic" target="_blank">Apri su Google Maps</a>
-          </div>
-        </div>
-        
+    <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=La%20Storia%20del%20Sic%20Coriano%7CVR46%20Store%20Tavullia%7CBar%20Contessa%20Gubbio%7CEsso%20E45%20Acquasparta&destination=ENI%20Salaria%20Ovest&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
+    <div class="stop"><div class="time">09:15</div><div><strong>Ritrovo</strong><span>Hotel Vannucci — check-out fatto e moto carica</span></div></div><div class="stop"><div class="time">09:45</div><div><strong>Visita ❤️</strong><span>Museo “La Storia del Sic” - Coriano</span><a href="https://maps.app.goo.gl/B8vZxRnTpMWyVXty5?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">11:30</div><div><strong>Visita 📸☕🛍️</strong><span>VR46 Store - Tavullia — alleggerimento ufficiale del portafoglio</span><a href="https://maps.app.goo.gl/yMMkkLhLwAZRbcDp9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">13:30</div><div><strong>Pranzo 🥪☕🚻</strong><span>Bar Contessa - Gubbio</span><a href="https://maps.app.goo.gl/DNDMyGJBpbTtZsav6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Sosta ⛽☕🚻</strong><span>Esso E45 Acquasparta</span><a href="https://maps.app.goo.gl/nZepBLPrvNNxD62U9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">17:30</div><div><strong>Saluti finali 🤗⛽☕</strong><span>Eni Salaria Ovest — foto di gruppo, abbracci e promesse</span><a href="https://maps.app.goo.gl/pvAzHFiANMCDneZp9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
-
   <h2 class="section-title">📸 Da fotografare — Lunedì 29/06</h2>
   <section class="photos">
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Marco_Simoncelli_2010_Qatar.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Marco Simoncelli">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Marco_Simoncelli_2010_Qatar.jpg/800px-Marco_Simoncelli_2010_Qatar.jpg" alt="Marco Simoncelli" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/File:Marco_Simoncelli_2010_Qatar.jpg" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181b%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%23dc2626%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EMarco%20Simoncelli%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3ECoriano%20%C2%B7%20La%20Storia%20del%20Sic%3C/text%3E%0A%3C/svg%3E" alt="Marco Simoncelli">
           </a>
           <div class="photo-body">
             <h3>Marco Simoncelli</h3>
@@ -550,73 +162,35 @@ h2 { margin:0 0 14px; font-size:24px; text-transform:uppercase; letter-spacing:.
         </article>
         
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Tavullia.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Tavullia">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Tavullia.jpg/800px-Tavullia.jpg" alt="Tavullia" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/Category:Tavullia" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181b%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%23dc2626%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3ETavullia%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EVR46%20%C2%B7%20Terra%20di%20motori%3C/text%3E%0A%3C/svg%3E" alt="Tavullia">
           </a>
           <div class="photo-body">
             <h3>Tavullia</h3>
             <p>Tappa iconica per ogni motociclista: foto, VR46 e atmosfera da motori.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:Tavullia.jpg" target="_blank">Apri foto originale</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:Tavullia" target="_blank">Apri foto originale</a>
           </div>
         </article>
         
         <article class="photo-card">
-          <a href="https://commons.wikimedia.org/wiki/File:Gubbio,_panorama_01.jpg" target="_blank" class="photo-link" aria-label="Apri foto originale di Gubbio">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Gubbio%2C_panorama_01.jpg/800px-Gubbio%2C_panorama_01.jpg" alt="Gubbio" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-photo');">
+          <a href="https://commons.wikimedia.org/wiki/Category:Gubbio" target="_blank" class="photo-link">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20560%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23111827%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%236d28d9%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23facc15%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22shade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.08%29%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.48%29%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22735%22%20cy%3D%22105%22%20r%3D%2258%22%20fill%3D%22rgba%28255%2C255%2C255%2C.35%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20390%20L190%20205%20L355%20390%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M180%20405%20L430%20125%20L760%20405%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.30%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M520%20420%20L690%20240%20L900%20420%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C.18%29%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20470%20C160%20420%20270%20485%20420%20440%20C570%20395%20690%20455%20900%20405%20L900%20560%20L0%20560%20Z%22%20fill%3D%22rgba%280%2C0%2C0%2C.28%29%22/%3E%0A%20%20%3Crect%20width%3D%22900%22%20height%3D%22560%22%20fill%3D%22url%28%23shade%29%22/%3E%0A%20%20%3Ctext%20x%3D%2254%22%20y%3D%22402%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22900%22%20fill%3D%22white%22%3EGubbio%3C/text%3E%0A%20%20%3Ctext%20x%3D%2256%22%20y%3D%22456%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2CSegoe%20UI%2CArial%2Csans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%3EMedievale%20e%20panoramica%3C/text%3E%0A%3C/svg%3E" alt="Gubbio">
           </a>
           <div class="photo-body">
             <h3>Gubbio</h3>
             <p>Città medievale spettacolare: pietra, salite, scorci e panorama umbro.</p>
-            <a href="https://commons.wikimedia.org/wiki/File:Gubbio,_panorama_01.jpg" target="_blank">Apri foto originale</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:Gubbio" target="_blank">Apri foto originale</a>
           </div>
         </article>
         </section>
-
   <h2 class="section-title">🏍️ Per il biker — Lunedì 29/06</h2>
-  <p class="biker-note">
-    Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.
-  </p>
-  <section class="biker-grid">
-        <article class="biker-card">
-          <div class="biker-tag">Emotivo</div>
-          <h3>Rimini → Coriano</h3>
-          <p>Tappa breve ma simbolica verso il museo dedicato al Sic.</p>
-          <a href="https://www.google.com/maps/dir/Rimini/La+Storia+del+Sic+Coriano" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Iconico</div>
-          <h3>Coriano → Tavullia</h3>
-          <p>Tratto breve, ma molto motociclistico per significato: dalla memoria del Sic al mondo VR46.</p>
-          <a href="https://www.google.com/maps/dir/Coriano/Tavullia" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        
-        <article class="biker-card">
-          <div class="biker-tag">Scorrevole</div>
-          <h3>Tavullia → Gubbio</h3>
-          <p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p>
-          <a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a>
-        </article>
-        </section>
+  <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
+  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Emotivo</div><h3>Rimini → Coriano</h3><p>Tappa breve ma simbolica verso il museo dedicato al Sic.</p><a href="https://www.google.com/maps/dir/Rimini/La+Storia+del+Sic+Coriano" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Iconico</div><h3>Coriano → Tavullia</h3><p>Tratto breve, ma molto motociclistico per significato: dalla memoria del Sic al mondo VR46.</p><a href="https://www.google.com/maps/dir/Coriano/Tavullia" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Scorrevole</div><h3>Tavullia → Gubbio</h3><p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p><a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
-
-<div class="footer-space"></div>
-</main>
-
+<div class="footer-space"></div></main>
 <script>
-const buttons = document.querySelectorAll('.tab-button');
-const panels = document.querySelectorAll('.day-panel');
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const tab = button.dataset.tab;
-    buttons.forEach(b => b.classList.remove('active'));
-    panels.forEach(p => p.classList.remove('active'));
-    button.classList.add('active');
-    document.getElementById(tab).classList.add('active');
-    window.scrollTo({ top: document.getElementById('programma').offsetTop, behavior: 'smooth' });
-  });
-});
+const buttons=document.querySelectorAll('.tab-button');const panels=document.querySelectorAll('.day-panel');
+buttons.forEach(button=>{button.addEventListener('click',()=>{const tab=button.dataset.tab;buttons.forEach(b=>b.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));button.classList.add('active');document.getElementById(tab).classList.add('active');window.scrollTo({top:document.getElementById('programma').offsetTop,behavior:'smooth'});});});
 </script>
-</body>
-</html>
+</body></html>
