@@ -72,7 +72,7 @@ main{max-width:980px;margin:0 auto;padding:14px}
      ========================================================== -->
 <nav class="tabbar">.
    ========================================================== */
-.tabbar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:rgba(243,244,246,.96);backdrop-filter:blur(10px);padding:10px 0 12px;margin-bottom:8px}
+.tabbar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);gap:7px;background:rgba(243,244,246,.96);backdrop-filter:blur(10px);padding:10px 0 12px;margin-bottom:8px}
 .tab-button{border:1px solid var(--border);background:white;color:var(--text);border-radius:15px;padding:11px 6px;font-weight:900;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.05)}.tab-button small{color:var(--muted);font-weight:800}.tab-button.active{background:var(--dark);color:white;border-color:var(--dark)}.tab-button.active small{color:#d1d5db}
 /* I pannelli dei giorni sono nascosti, tranne quello con class="active" */
 .day-panel{display:none}.day-panel.active{display:block}
@@ -168,8 +168,13 @@ main{max-width:980px;margin:0 auto;padding:14px}
      Ogni bottone apre una sezione diversa.
      data-tab="sabato" apre <section id="sabato">
      ========================================================== -->
-<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
-   <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
+<nav class="tabbar">
+   <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
+   <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
+   <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
+   <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
+   <button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button>
+</nav>
 <!-- ==========================================================
      TAB GENERALE INFO
      È aperto di default grazie a class="active".
@@ -187,25 +192,7 @@ main{max-width:980px;margin:0 auto;padding:14px}
       style="max-width: 100%; height: auto;">
   </div>
 </section>
-     <!-- SOCIAL -->
-<section class="mission-card">
-  <h2>💬 Social</h2>
-
-  <div style="text-align: center; padding: 10px 0;">
-    <a
-      href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0"
-      target="_blank"
-      style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
-
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-        alt="WhatsApp"
-        style="width: 70px; height: 70px;">
-
-      <span>Entra nel gruppo dedicato su WhatsApp</span>
-    </a>
-  </div>
-</section>
+    
   <!-- MISSIONE -->
   <section class="mission-card">
     <h2>🏆 Missione del weekend</h2>
@@ -297,6 +284,54 @@ main{max-width:980px;margin:0 auto;padding:14px}
       🏁 L’obiettivo non è arrivare primi, ma arrivare tutti insieme e divertirci. 🍝🏍️😎✌️
     </div>
   </section>
+</section>
+
+<section id="social" class="day-panel">
+  
+   <!-- SOCIAL -->
+<section class="mission-card">
+  <h2>💬 Social</h2>
+
+  <div style="text-align: center; padding: 10px 0;">
+    <a
+      href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0"
+      target="_blank"
+      style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        style="width: 70px; height: 70px;">
+
+      <span>Entra nel gruppo dedicato su WhatsApp</span>
+    </a>
+  </div>
+</section>
+    <!-- SONDAGGI -->
+  <section class="mission-card">
+    <h2>📊 Sondaggi del gruppo</h2>
+
+    <p style="color:#6b7280; line-height:1.45; margin-bottom:16px;">
+      Vota e visualizza le preferenze del gruppo per i prossimi eventi, destinazioni e attività.
+    </p>
+
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfCAPwyGmeRbK_UmRVLGm4ZFkI37rKcNNhX8otmS52AbJao5g/viewform?embedded=true"
+      width="100%"
+      height="900"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      style="
+        border:none;
+        border-radius:16px;
+        background:white;
+      ">
+      Caricamento...
+    </iframe>
+  </section>
+</section>
+   
 </section>
 <!-- ==========================================================
      TAB SABATO
