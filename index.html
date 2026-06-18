@@ -530,6 +530,10 @@
         width: auto;
         min-width: 260px;
       }
+
+      .cost-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 430px) {
@@ -636,6 +640,7 @@
     <nav class="tabbar">
       <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
       <button class="tab-button" data-tab="checklist">Check list<br><small>Partenza</small></button>
+      <button class="tab-button" data-tab="costi">Costi<br><small>Weekend</small></button>
       <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
       <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
       <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
@@ -816,6 +821,123 @@
 
         <p style="color: #6b7280; line-height: 1.45;">
           Pagina aggiornata il 18/06/2026. Controlla sempre eventuali modifiche prima della partenza.
+        </p>
+      </section>
+    </section>
+
+
+    <section id="costi" class="day-panel">
+      <section class="mission-card">
+        <h2>💰 Costi weekend</h2>
+
+        <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
+          Riepilogo costi del weekend Toscana-Romagna. Alcune voci sono già definite,
+          altre verranno aggiornate quando avremo conferma dei prezzi.
+        </p>
+
+        <div class="warning">
+          🏍️🍷🔥 PROGRAMMA UFFICIALE “RECUPERO CALORIE” – Weekend Toscana-Romagna 🔥🍷🏍️
+          <br><br>
+          Dopo infinite riunioni 🍷😂, calcoli degni della MotoGP 🧮🏁 e attente valutazioni sul rapporto qualità/prezzo/quantità 😎…
+          il direttivo ha finalmente partorito le cene del weekend!
+        </div>
+      </section>
+
+      <section class="cost-grid">
+        <article class="cost-card">
+          <h3>🍷 Cene organizzate</h3>
+
+          <h4>🔥 Sabato 27/06 – MotoClub / Museo di Rimini 🏍️🏁</h4>
+          <ul>
+            <li>🥓 Antipasto di affettati</li>
+            <li>🥙 Piadina con carne alla brace e insalata 🥩🥗</li>
+            <li>💧 Acqua e 🍷 vino</li>
+          </ul>
+
+          <div class="price-line">💰 15,00 €</div>
+
+          <div class="cost-note">
+            🏛️ Per chi vuole, sarà possibile visitare il museo del motociclismo,
+            il più antico d’Italia 🇮🇹🏍️
+            <br><br>
+            Quindi preparatevi a fare finta di capire la differenza tra i modelli
+            mentre annuite seri davanti alle moto d’epoca 😂
+          </div>
+
+          <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+          <h4>🔥 Domenica 28/06 – Trattoria Renzi 🍝🍖🔥</h4>
+          <ul>
+            <li>🍜 Tagliatelle</li>
+            <li>🥩 Carne alla brace</li>
+            <li>🥗 Insalata</li>
+            <li>🍟 Patatine</li>
+            <li>🥙 Piadina</li>
+            <li>💧 Acqua e 🍷 vino</li>
+            <li>🥃 Digestivo</li>
+            <li>☕ Caffè</li>
+            <li>🍰 Dolci della casa</li>
+          </ul>
+
+          <div class="price-line">💰 25,00 €</div>
+
+          <div class="cost-note">
+            Il digestivo è incluso perché il locale è già stato avvisato che arrivano motociclisti 🤣🏍️
+          </div>
+        </article>
+
+        <article class="cost-card">
+          <h3>🥪 Pranzi</h3>
+
+          <ul>
+            <li>Sabato 27/06 – Pranzo alla Raticosa: prezzo da confermare</li>
+            <li>Domenica 28/06 – Pranzo al Muraglione: prezzo da confermare</li>
+            <li>Lunedì 29/06 – Pranzo / sosta a Gubbio: prezzo da confermare</li>
+          </ul>
+
+          <div class="cost-note">
+            ⚠️ Tra le cene organizzate 🍷🍖 ed i pranzi 🌭 al Muraglione 🏔️ e Raticosa 🏔️…
+            lunedì il problema non sarà fare la strada di casa, ma allacciarsi il giubbotto 😎🔥😂
+          </div>
+        </article>
+
+        <article class="cost-card">
+          <h3>🏨 Quote fisse</h3>
+
+          <ul>
+            <li>Hotel: da inserire</li>
+            <li>Eventuale quota gruppo: da inserire</li>
+            <li>Museo / visita: da confermare</li>
+          </ul>
+
+          <div class="cost-note">
+            Qui possiamo inserire tutte le spese uguali per tutti, così ognuno sa già cosa deve preparare.
+          </div>
+        </article>
+
+        <article class="cost-card">
+          <h3>⛽ Varie</h3>
+
+          <ul>
+            <li>Benzina: variabile in base alla moto e allo stile di guida</li>
+            <li>Pedaggi: da verificare in base al percorso scelto</li>
+            <li>Caffè extra: inevitabili</li>
+            <li>Souvenir / calamite / magliette: responsabilità personale 😂</li>
+          </ul>
+
+          <div class="cost-note">
+            Nota scientifica: ogni sosta caffè aumenta il morale del gruppo del 37%.
+            Fonte: il direttivo, dopo la seconda birra.
+          </div>
+        </article>
+      </section>
+
+      <section class="cost-total">
+        <h3>📌 Totale pasti organizzati confermati</h3>
+        <p>
+          Cene confermate: <strong>15,00 € + 25,00 € = 40,00 €</strong>
+          <br>
+          Pranzi, hotel, benzina, pedaggi e varie verranno aggiornati appena disponibili.
         </p>
       </section>
     </section>
