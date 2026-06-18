@@ -639,7 +639,7 @@
   <main id="programma">
     <nav class="tabbar">
       <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
-      <button class="tab-button" data-tab="checklist">Check list<br><small>Partenza</small></button>
+      <button class="tab-button" data-tab="checklist">Checklist<br><small>Partenza</small></button>
       <button class="tab-button" data-tab="costi">Costi<br><small>Weekend</small></button>
       <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
       <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
@@ -773,32 +773,13 @@
 
         <ul>
           <li>Emergenza: 112</li>
-          <li>Soccorso stradale: da inserire</li>
-          <li>Referente gruppo: da inserire</li>
-          <li>Hotel Vannucci: da inserire</li>
+          <li>Referente gruppo: Paola +393347916829</li>
+          <li>Hotel Vannucci: +3905411792387</li>
         </ul>
       </section>
 
-      <section class="mission-card">
-        <h2>🎒 Cosa portare</h2>
-
-        <ul>
-          <li>Antipioggia</li>
-          <li>Guanti di ricambio</li>
-          <li>Felpa o sottogiacca leggero</li>
-          <li>Acqua</li>
-          <li>Occhiali da sole</li>
-          <li>Kit riparazione gomme / bombolette</li>
-          <li>Caricatore telefono</li>
-        </ul>
-      </section>
-
-      <section class="mission-card">
+     <section class="mission-card">
         <h2>📄 Programma PDF</h2>
-
-        <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
-          Qui puoi inserire il PDF del programma, se in futuro vuoi farlo scaricare al gruppo.
-        </p>
 
         <!--
           PULSANTE PDF DISATTIVATO
@@ -812,7 +793,7 @@
         -->
 
         <div class="warning">
-          PDF non ancora disponibile.
+          PDF non disponibile.
         </div>
       </section>
 
@@ -835,17 +816,22 @@
           altre verranno aggiornate quando avremo conferma dei prezzi.
         </p>
 
-        <div class="warning">
-          🏍️🍷🔥 PROGRAMMA UFFICIALE “RECUPERO CALORIE” – Weekend Toscana-Romagna 🔥🍷🏍️
-          <br><br>
-          Dopo infinite riunioni 🍷😂, calcoli degni della MotoGP 🧮🏁 e attente valutazioni sul rapporto qualità/prezzo/quantità 😎…
-          il direttivo ha finalmente partorito le cene del weekend!
-        </div>
-      </section>
+       </section>
 
       <section class="cost-grid">
-        <article class="cost-card">
-          <h3>🍷 Cene organizzate</h3>
+
+        <article class="mission-card">
+          <h3>🥪 Pranzi</h3>
+
+          <ul>
+            <li>Sabato 27/06 – Pranzo alla Raticosa: da confermare</li>
+            <li>Domenica 28/06 – Pranzo al Muraglione: da confermare</li>
+            <li>Lunedì 29/06 – Pranzo a Gubbio: da confermare</li>
+          </ul>
+        </article>
+              
+        <article class="mission-card">
+          <h3>🍷 Cene</h3>
 
           <h4>🔥 Sabato 27/06 – MotoClub / Museo di Rimini 🏍️🏁</h4>
           <ul>
@@ -855,16 +841,6 @@
           </ul>
 
           <div class="price-line">💰 15,00 €</div>
-
-          <div class="cost-note">
-            🏛️ Per chi vuole, sarà possibile visitare il museo del motociclismo,
-            il più antico d’Italia 🇮🇹🏍️
-            <br><br>
-            Quindi preparatevi a fare finta di capire la differenza tra i modelli
-            mentre annuite seri davanti alle moto d’epoca 😂
-          </div>
-
-          <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
 
           <h4>🔥 Domenica 28/06 – Trattoria Renzi 🍝🍖🔥</h4>
           <ul>
@@ -885,23 +861,8 @@
             Il digestivo è incluso perché il locale è già stato avvisato che arrivano motociclisti 🤣🏍️
           </div>
         </article>
-
-        <article class="cost-card">
-          <h3>🥪 Pranzi</h3>
-
-          <ul>
-            <li>Sabato 27/06 – Pranzo alla Raticosa: prezzo da confermare</li>
-            <li>Domenica 28/06 – Pranzo al Muraglione: prezzo da confermare</li>
-            <li>Lunedì 29/06 – Pranzo / sosta a Gubbio: prezzo da confermare</li>
-          </ul>
-
-          <div class="cost-note">
-            ⚠️ Tra le cene organizzate 🍷🍖 ed i pranzi 🌭 al Muraglione 🏔️ e Raticosa 🏔️…
-            lunedì il problema non sarà fare la strada di casa, ma allacciarsi il giubbotto 😎🔥😂
-          </div>
-        </article>
-
-        <article class="cost-card">
+        
+        <article class="mission-card">
           <h3>🏨 Quote fisse</h3>
 
           <ul>
@@ -909,36 +870,24 @@
             <li>Eventuale quota gruppo: da inserire</li>
             <li>Museo / visita: da confermare</li>
           </ul>
-
-          <div class="cost-note">
-            Qui possiamo inserire tutte le spese uguali per tutti, così ognuno sa già cosa deve preparare.
-          </div>
         </article>
+        
+                
+        <!-- 
+  RIQUADRO "VARIE" MOMENTANEAMENTE DISATTIVATO
+  Lo tengo nel codice perché potrebbe servire in futuro.
 
-        <article class="cost-card">
-          <h3>⛽ Varie</h3>
+  <article class="cost-card">
+    <h3>⛽ Varie</h3>
 
-          <ul>
-            <li>Benzina: variabile in base alla moto e allo stile di guida</li>
-            <li>Pedaggi: da verificare in base al percorso scelto</li>
-            <li>Caffè extra: inevitabili</li>
-            <li>Souvenir / calamite / magliette: responsabilità personale 😂</li>
-          </ul>
-
-          <div class="cost-note">
-            Nota scientifica: ogni sosta caffè aumenta il morale del gruppo del 37%.
-            Fonte: il direttivo, dopo la seconda birra.
-          </div>
-        </article>
-      </section>
-
-      <section class="cost-total">
-        <h3>📌 Totale pasti organizzati confermati</h3>
-        <p>
-          Cene confermate: <strong>15,00 € + 25,00 € = 40,00 €</strong>
-          <br>
-          Pranzi, hotel, benzina, pedaggi e varie verranno aggiornati appena disponibili.
-        </p>
+    <ul>
+      <li>Benzina: variabile in base alla moto e allo stile di guida</li>
+      <li>Pedaggi: da verificare in base al percorso scelto</li>
+      <li>Caffè extra: inevitabili</li>
+      <li>Souvenir / calamite / magliette: responsabilità personale 😂</li>
+    </ul>
+  </article>
+-->
       </section>
     </section>
 
