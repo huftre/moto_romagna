@@ -118,25 +118,37 @@
       padding: 14px;
     }
 
+    /* Barra tab scorrevole: utile quando i tab sono tanti su iPhone */
     .tabbar {
       position: sticky;
       top: 0;
       z-index: 20;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 7px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
       background: rgba(243, 244, 246, .96);
       backdrop-filter: blur(10px);
       padding: 10px 0 12px;
       margin-bottom: 8px;
     }
 
+    /* Nasconde la barra di scorrimento su Chrome/Safari */
+    .tabbar::-webkit-scrollbar {
+      display: none;
+    }
+
     .tab-button {
+      flex: 0 0 auto;
+      min-width: 128px;
       border: 1px solid var(--border);
       background: white;
       color: var(--text);
       border-radius: 15px;
-      padding: 11px 6px;
+      padding: 11px 12px;
       font-weight: 900;
       font-size: 13px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, .05);
@@ -568,6 +580,19 @@
         font-size: 12px;
         padding: 6px 8px;
       }
+
+      /* Tab mobile: restano leggibili e scorrono orizzontalmente */
+      .tabbar {
+        gap: 8px;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .tab-button {
+        min-width: 118px;
+        font-size: 12px;
+        padding: 10px 10px;
+      }
     }
   </style>
 </head>
@@ -610,7 +635,7 @@
   <main id="programma">
     <nav class="tabbar">
       <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
-      <button class="tab-button" data-tab="checklist">Checklist<br><small>Partenza</small></button>
+      <button class="tab-button" data-tab="checklist">Check list<br><small>Partenza</small></button>
       <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
       <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
       <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
@@ -743,8 +768,23 @@
 
         <ul>
           <li>Emergenza: 112</li>
-          <li>Referente gruppo: Paola +393347916829</li>
-          <li>Hotel Vannucci: +3905411792387</li>
+          <li>Soccorso stradale: da inserire</li>
+          <li>Referente gruppo: da inserire</li>
+          <li>Hotel Vannucci: da inserire</li>
+        </ul>
+      </section>
+
+      <section class="mission-card">
+        <h2>🎒 Cosa portare</h2>
+
+        <ul>
+          <li>Antipioggia</li>
+          <li>Guanti di ricambio</li>
+          <li>Felpa o sottogiacca leggero</li>
+          <li>Acqua</li>
+          <li>Occhiali da sole</li>
+          <li>Kit riparazione gomme / bombolette</li>
+          <li>Caricatore telefono</li>
         </ul>
       </section>
 
@@ -752,7 +792,7 @@
         <h2>📄 Programma PDF</h2>
 
         <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
-          Qui puoi scaricare il programma in formato pdf.
+          Qui puoi inserire il PDF del programma, se in futuro vuoi farlo scaricare al gruppo.
         </p>
 
         <!--
@@ -767,7 +807,7 @@
         -->
 
         <div class="warning">
-          PDF non disponibile.
+          PDF non ancora disponibile.
         </div>
       </section>
 
