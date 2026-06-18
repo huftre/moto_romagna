@@ -429,30 +429,7 @@
       line-height: 1.35;
       text-transform: uppercase;
     }
-
-
-    /* Widget sondaggi Poll Maker: modifica qui altezza, bordo o spaziatura */
-    .poll-widget {
-      width: 100%;
-      overflow: hidden;
-      border-radius: 16px;
-      background: transparent;
-    }
-
-    .poll-widget iframe {
-      width: 100%;
-      min-height: 480px;
-      border: 0;
-      display: block;
-    }
-
-    @media (max-width: 480px) {
-      .poll-widget iframe {
-        min-height: 480px;
-      }
-    }
-
-    .footer-space {
+.footer-space {
       height: 18px;
     }
 
@@ -546,12 +523,10 @@
       risate assicurate, tante curve e zero fretta.
     </p>
 
-    <!-- PULSANTI HEADER NASCOSTI: togli questo commento se vuoi rimetterli
-<div class="buttons">
-  <a class="btn red" href="#programma">Vai al programma</a>
-  <a class="btn blue" href="#generale" id="infoButton">Informazioni</a>
-</div>
--->
+    <div class="buttons">
+      <a class="btn red" href="#programma">Vai al programma</a>
+      <a class="btn blue" href="#generale" id="infoButton">Informazioni</a>
+    </div>
   </section>
 
   <main id="programma">
@@ -687,39 +662,32 @@
         </div>
       </section>
 
-      
       <section class="mission-card">
-        <h2>📊 Sondaggi del gruppo</h2>
+        <h2>📊 Sondaggio del gruppo</h2>
 
         <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
-          Vota le preferenze del gruppo direttamente dalla pagina.
+          Il sondaggio verrà gestito direttamente nella chat WhatsApp del gruppo.
         </p>
 
-        <!-- Widget Poll Maker: per cambiare sondaggio sostituisci solo il link dentro src="" -->
-        <div class="poll-widget">
-          <iframe
-            class="qp_iframe"
-            src="https://poll-maker.com/frame5803233x72cE419d-168"
-            seamless="seamless"
-            frameborder="0"
-            scrolling="auto"
-            style="border: 0; background: transparent; width: 100%; height: 480px;">
-          </iframe>
+        <!-- Pulsante sondaggio WhatsApp: per cambiare destinazione modifica solo href="" -->
+        <div style="text-align: center; padding: 10px 0;">
+          <a
+            href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0"
+            target="_blank"
+            style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
 
-          <div
-            id="qp_foot5803233"
-            style="width: 100%; padding: 5px; text-align: center; font-size: 12px; color: #6b7280;">
-            Created with
-            <a href="https://poll-maker.com/poll5803233x72cE419d-168" target="_blank">
-              Poll Maker
-            </a>
-          </div>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp"
+              style="width: 70px; height: 70px;">
+
+            <span>Apri il sondaggio su WhatsApp</span>
+          </a>
         </div>
       </section>
 
     </section>
 
-    
     <section id="sabato" class="day-panel">
       <section class="map-card">
         <div class="map-wrap">
