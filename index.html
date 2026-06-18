@@ -38,7 +38,7 @@
       padding: 44px 18px 34px;
       color: white;
       background:
-        linear-gradient(135deg, rgba(17, 24, 39, .94), rgba(31, 41, 55, .82)),
+        linear-gradient(135deg, rgba(17, 24, 39, .65), rgba(31, 41, 55, .45)),
         url("https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg");
       background-size: cover;
       background-position: center;
@@ -524,9 +524,17 @@
     </p>
 
     <div class="buttons">
-      <a class="btn red" href="#programma">Vai al programma</a>
-      <a class="btn blue" href="#generale" id="infoButton">Informazioni</a>
-    </div>
+  <a class="btn red" href="#sabato" id="programmaButton">
+    Vai al programma
+  </a>
+
+  <!-- 
+    PULSANTE INFORMAZIONI DISATTIVATO
+    Lo tengo nel codice perché potrebbe servire in futuro.
+
+    <a class="btn blue" href="#generale" id="infoButton">Informazioni</a>
+  -->
+</div>
   </section>
 
   <main id="programma">
@@ -644,7 +652,7 @@
 
     <section id="social" class="day-panel">
       <section class="mission-card">
-        <h2>💬 Social</h2>
+        <h2>💬 Gruppo Whatsapp</h2>
 
         <div style="text-align: center; padding: 10px 0;">
           <a
@@ -657,13 +665,13 @@
               alt="WhatsApp"
               style="width: 70px; height: 70px;">
 
-            <span>Entra nel gruppo dedicato su WhatsApp</span>
+            <span>Entra nel gruppo dedicato</span>
           </a>
         </div>
       </section>
 
       <section class="mission-card">
-        <h2>📊 Sondaggio del gruppo</h2>
+        <h2>📊 Sondaggio</h2>
 
         <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
           Il sondaggio verrà gestito direttamente nella chat WhatsApp del gruppo.
@@ -672,16 +680,15 @@
         <!-- Pulsante sondaggio WhatsApp: per cambiare destinazione modifica solo href="" -->
         <div style="text-align: center; padding: 10px 0;">
           <a
-            href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0"
-            target="_blank"
-            style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+              href="javascript:void(0)"
+              style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
 
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
               alt="WhatsApp"
               style="width: 70px; height: 70px;">
 
-            <span>Apri il sondaggio su WhatsApp</span>
+            <span>Attualmente non è aperto nessun sondaggio</span>
           </a>
         </div>
       </section>
@@ -1450,6 +1457,15 @@
         activateTab('generale');
       });
     }
+
+    const programmaButton = document.getElementById('programmaButton');
+
+if (programmaButton) {
+  programmaButton.addEventListener('click', event => {
+    event.preventDefault();
+    activateTab('sabato');
+  });
+}
   </script>
 </body>
 </html>
