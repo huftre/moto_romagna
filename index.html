@@ -779,23 +779,21 @@
       </section>
 
      <section class="mission-card">
-        <h2>📄 Programma PDF</h2>
+  <h2>📄 Programma PDF</h2>
 
-        <!--
-          PULSANTE PDF DISATTIVATO
-          Per attivarlo:
-          1. carica un file chiamato programma.pdf nella stessa cartella di index.html
-          2. togli i commenti da questo blocco
+  <button type="button" class="mini-btn red" onclick="stampaProgrammaPDF()">
+    Scarica / Stampa programma PDF
+  </button>
 
-          <a class="mini-btn red" href="programma.pdf" target="_blank">
-            Scarica programma PDF
-          </a>
-        -->
+  <!--
+    MESSAGGIO PDF DISATTIVATO
+    Lo tengo nel codice perché potrebbe servire se vuoi togliere il pulsante in futuro.
 
-        <div class="warning">
-          PDF non disponibile.
-        </div>
-      </section>
+    <div class="warning">
+      PDF non disponibile.
+    </div>
+  -->
+</section>
 
       <section class="mission-card">
         <h2>🕒 Ultimo aggiornamento</h2>
@@ -1921,5 +1919,164 @@ if (programmaButton) {
   });
 }
   </script>
+  <script>
+  function stampaProgrammaPDF() {
+    const contenutoPDF = `
+      <html>
+      <head>
+        <title>Programma Toscana - Romagna</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 24px;
+            color: #111827;
+          }
+
+          h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 8px;
+          }
+
+          h2 {
+            margin-top: 28px;
+            font-size: 22px;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 6px;
+          }
+
+          h3 {
+            margin-top: 18px;
+            font-size: 18px;
+          }
+
+          ul {
+            padding-left: 22px;
+          }
+
+          li {
+            margin: 7px 0;
+            line-height: 1.4;
+          }
+
+          .totale {
+            margin-top: 12px;
+            font-weight: bold;
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 8px;
+          }
+
+          .box {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 14px;
+            margin: 14px 0;
+          }
+
+          @media print {
+            button {
+              display: none;
+            }
+          }
+        </style>
+      </head>
+
+      <body>
+        <h1>🏍️ TOSCANA - ROMAGNA</h1>
+        <p style="text-align:center;">
+          Programma sintetico con tappe, orari, pranzi e cene
+        </p>
+
+        <h2>Sabato 27/06</h2>
+        <ul>
+          <li><strong>08:00</strong> — Ritrovo 🤗⛽☕ ENI Salaria Est</li>
+          <li><strong>08:30</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>10:00</strong> — Sosta ☕🚻 IP Fabro</li>
+          <li><strong>10:15</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>12:00</strong> — Sosta ⛽☕🚻 IP Sesto Fiorentino</li>
+          <li><strong>12:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>13:30</strong> — Pranzo 📸🥪🚻 Chalet Raticosa</li>
+          <li><strong>14:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>15:30</strong> — Sosta ☕🚻 Bar Renzo - Imola</li>
+          <li><strong>16:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>17:30</strong> — Arrivo 🏁 Hotel Vannucci - Rimini</li>
+          <li><strong>19:30</strong> — Aperitivo 🥂</li>
+          <li><strong>20:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:10</strong> — Sosta benzina ⛽ per il giorno dopo</li>
+          <li><strong>20:20</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:30</strong> — Cena 🌮🥗🍷 Museo Nazionale del Motociclo</li>
+        </ul>
+        <div class="totale">Totale: 487 km</div>
+
+        <h2>Domenica 28/06</h2>
+        <ul>
+          <li><strong>09:00</strong> — Ritrovo 🤗 Hotel Vannucci</li>
+          <li><strong>09:15</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>10:30</strong> — Sosta ☕🚻 Ristorante Casa La Corte - Forlì</li>
+          <li><strong>11:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>12:30</strong> — Pranzo 📸🥪☕🚻 Bar Il Muraglione</li>
+          <li><strong>13:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>15:00</strong> — Sosta ⛽☕🚻 Esso Bertinoro</li>
+          <li><strong>15:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>16:30</strong> — Visita 📸 San Marino</li>
+          <li><strong>17:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>18:15</strong> — Arrivo 🏁 Hotel Vannucci</li>
+          <li><strong>19:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:00</strong> — Cena 🍝 Trattoria Da Renzi</li>
+          <li><strong>22:30 circa</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>23:30 circa</strong> — Rientro Hotel Vannucci 🛌</li>
+        </ul>
+        <div class="totale">Totale: 347 km</div>
+
+        <h2>Lunedì 29/06</h2>
+        <ul>
+          <li><strong>09:00</strong> — Ritrovo 🤗 Hotel Vannucci</li>
+          <li><strong>09:15</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>09:45</strong> — Visita ❤️ Museo La Storia del Sic - Coriano</li>
+          <li><strong>11:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>11:30</strong> — Sosta 📸🚻☕🛍️ VR46 Store - Tavullia</li>
+          <li><strong>12:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>13:30</strong> — Pranzo 🥪☕🚻 Bar Contessa - Gubbio</li>
+          <li><strong>14:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>16:00</strong> — Sosta ⛽☕🚻 Esso E45 - Acquasparta</li>
+          <li><strong>16:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>17:30</strong> — Sosta ⛽☕🚻 e saluti 🤗 Eni Salaria Ovest</li>
+          <li><strong>18:00</strong> — Ripartenza 🏍️💨 tutti a casa 🏁🏠</li>
+        </ul>
+        <div class="totale">Totale: 314 km</div>
+
+        <h2>Riassunto pranzi e cene</h2>
+
+        <div class="box">
+          <h3>🥪 Pranzi</h3>
+          <ul>
+            <li>Sabato — Chalet Raticosa: da confermare</li>
+            <li>Domenica — Bar Il Muraglione: da confermare</li>
+            <li>Lunedì — Bar Contessa, Gubbio: da confermare</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>🍷 Cene</h3>
+          <ul>
+            <li>Sabato — MotoClub / Museo Nazionale del Motociclo: <strong>15,00 €</strong></li>
+            <li>Domenica — Trattoria Da Renzi: <strong>25,00 €</strong></li>
+          </ul>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const finestra = window.open('', '_blank');
+    finestra.document.open();
+    finestra.document.write(contenutoPDF);
+    finestra.document.close();
+
+    finestra.onload = function () {
+      finestra.print();
+    };
+  }
+</script>
 </body>
 </html>
