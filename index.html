@@ -1885,14 +1885,22 @@
       const selectedPanel = document.getElementById(tab);
 
       if (selectedButton && selectedPanel) {
-        selectedButton.classList.add('active');
-        selectedPanel.classList.add('active');
+  selectedButton.classList.add('active');
+  selectedPanel.classList.add('active');
 
-        window.scrollTo({
-          top: document.getElementById('programma').offsetTop,
-          behavior: 'smooth'
-        });
-      }
+  // Porta automaticamente il tab selezionato al centro della barra scorrevole
+  // Utile su iPhone quando clicchi "Vai al programma" e Sabato è fuori schermo
+  selectedButton.scrollIntoView({
+    behavior: 'smooth',
+    inline: 'center',
+    block: 'nearest'
+  });
+
+  window.scrollTo({
+    top: document.getElementById('programma').offsetTop,
+    behavior: 'smooth'
+  });
+}
     }
 
     buttons.forEach(button => {
